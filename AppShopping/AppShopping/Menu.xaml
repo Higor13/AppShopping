@@ -4,7 +4,7 @@
              xmlns:views="clr-namespace:AppShopping.Views"
              x:Class="AppShopping.Menu">
     <Shell.FlyoutHeader>
-        <Grid ColumnDefinitions="1*,2*" RowDefinitions="Auto, Auto" Margin="0, 25" BackgroundColor="#3F51B5" >
+        <Grid ColumnDefinitions="1*,2*" RowDefinitions="Auto, Auto" Padding="0, 25" BackgroundColor="{StaticResource PrimaryColor}" >
             <Image Source="BagWhite" Grid.RowSpan="2" />
             <Label Text="Bem vindo! ao" Grid.Column="1" Style="{StaticResource MenuHeaderLabel}" />
             <Image Source="LogoWhite" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
