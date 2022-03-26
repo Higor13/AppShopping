@@ -3,6 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:AppShopping.Views"
              x:Class="AppShopping.Menu">
+    <Shell.FlyoutHeader>
+        <Grid ColumnDefinitions="1*,2*" RowDefinitions="Auto, Auto" Margin="0, 25" BackgroundColor="#3F51B5" >
+            <Image Source="BagWhite" Grid.RowSpan="2" />
+            <Label Text="Bem vindo! ao" Grid.Column="1" Style="{StaticResource MenuHeaderLabel}" />
+            <Image Source="LogoWhite" HorizontalOptions="Start" Grid.Column="1" Grid.Row="1" />
+        </Grid>
+    </Shell.FlyoutHeader>
     <FlyoutItem Title="Principais" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Lojas" Icon="MenuIconStore" ContentTemplate="{DataTemplate views:Stores}" />
         <ShellContent Title="Restaurantes" Icon="MenuIconRestaurant" ContentTemplate="{DataTemplate views:Stores}" />
