@@ -8,7 +8,7 @@ namespace AppShopping.Services
 {
     public class EstablishmentService
     {
-        public List<Establishment> GetEstablishment()
+        public List<Establishment> GetEstablishments()
         {
             var establishments = new List<Establishment>()
             {
