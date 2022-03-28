@@ -1,12 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppShopping.Views.Stores">
+             x:Class="AppShopping.Views.Stores"
+             xmlns:viewModels="clr-namespace:AppShopping.ViewModels">
+    
+    <ContentPage.BindingContext>
+        <viewModels:StoresViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Lojas!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding SearchWord}" Placeholder="Pesquisa" />
+            <Button Command="{Binding SearchCommand}" Text="OK" />
+            <CollectionView ItemsSource="{Binding Establishments}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
