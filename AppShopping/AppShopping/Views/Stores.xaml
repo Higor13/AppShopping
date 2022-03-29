@@ -3,6 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppShopping.Views.Stores"
              xmlns:viewModels="clr-namespace:AppShopping.ViewModels">
+    <Shell.TitleView>
+        <ContentView>
+            <Image Source="TitleViewLogo" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="30" />
+        </ContentView>
+    </Shell.TitleView>
     
     <ContentPage.BindingContext>
         <viewModels:StoresViewModel />
