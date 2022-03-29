@@ -41,6 +41,23 @@
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="TextColor" Value="{StaticResource White}" />
             </Style>
+
+            <Style TargetType="Line">
+                <Setter Property="Stroke" Value="#707070" />
+                <Setter Property="StrokeDashArray" Value="3,3" />
+            </Style>
+            
+            <Style TargetType="Label" x:Key="NameEstablishment">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource Black}" />
+            </Style>
+            <Style TargetType="Label" x:Key="DescriptionEstablishment">
+                <Setter Property="FontFamily" Value="MontserratLight" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource TextSecondColor}" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
