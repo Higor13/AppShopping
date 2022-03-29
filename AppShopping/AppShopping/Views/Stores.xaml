@@ -23,7 +23,7 @@
                                     <Image HeightRequest="80" Source="{Binding Logo}" Margin="10" />
                                     <Line Grid.Column="1" Stroke="{StaticResource BorderColor}" StrokeDashArray="3,3" X1="0" X2="0" Y1="0" Y2="96" />
                                     <StackLayout Grid.Column="2" Margin="10">
-                                        <Label Text="{Binding Nome}" Style="{StaticResource NameEstablishment}" />
+                                        <Label Text="{Binding Name}" Style="{StaticResource NameEstablishment}" />
                                         <Label Text="{Binding Description}" MaxLines="3" Style="{StaticResource DescriptionEstablishment}" />
                                     </StackLayout>
                                 </Grid>
