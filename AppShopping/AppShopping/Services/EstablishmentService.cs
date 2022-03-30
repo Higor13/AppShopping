@@ -19,7 +19,7 @@ namespace AppShopping.Services
                     Logo = "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/122012/renner_0.png?itok=VvGKSsDe",
                     Name = "Renner",
                     Description = "A Lojas Renner S.A é uma rede de lojas de departamento brasileira",
-                    Address = "3 Andar - Loja 10 - Setor Norte",
+                    Address = "2 Andar - Loja 10/11/12/13/14 - Entrada Norte",
                     Phone = "(61) 3333-3333",
                 },
                 new Establishment()
