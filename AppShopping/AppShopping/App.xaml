@@ -32,6 +32,13 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource LightGray}" />
             </Style>
             
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="BorderColor" Value="{StaticResource BorderColor}" />
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="HasShadow" Value="False" />
+            </Style>
+
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratRegular" />
             </Style>
