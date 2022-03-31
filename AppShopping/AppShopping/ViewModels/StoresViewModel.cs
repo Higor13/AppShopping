@@ -28,13 +28,19 @@ namespace AppShopping.ViewModels
                 SetProperty(ref _establishments, value);
             }
         }
+
         private List<Establishment> _allEstablishments;
+
+        public ICommand DetailCommand { get; set; }
 
         public StoresViewModel()
         {
             SearchCommand = new Command(Search); // O que será feito quando clicar no botão de OK
+            DetailCommand = new Command<Establishment>(Detail);
+
             var allEstablishment = new EstablishmentService().GetEstablishments(); // Todos os Establishments
             var allStores = allEstablishment.Where(a => a.Type == EstablishmentType.Store).ToList(); // Todos as Stores
+
             Establishments = allStores;
             _allEstablishments = allStores;
         }
@@ -43,6 +49,11 @@ namespace AppShopping.ViewModels
         {
             // Lógica para filtrar a lista de Lojas
             Establishments = _allEstablishments.Where(a => a.Name.ToLower().Contains(SearchWord.ToLower())).ToList();
+        }
+
+        private void Detail(Establishment establishment)
+        {
+            Shell.Current.GoToAsync("establishment/detail");
         }
     }
 }
