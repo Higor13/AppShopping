@@ -13,51 +13,10 @@ using Newtonsoft.Json;
 
 namespace AppShopping.ViewModels
 {
-    public class StoresViewModel : BaseViewModel
+    public class StoresViewModel : EstablishmentViewModel
     {
-        public String SearchWord { get; set; }
-        public ICommand SearchCommand { get; set; }
-        private List<Establishment> _establishments;
-        public List<Establishment> Establishments
+        public StoresViewModel(EstablishmentType establishmentType) : base(establishmentType)
         {
-            get
-            {
-                return _establishments;
-            }
-            set
-            {
-                SetProperty(ref _establishments, value);
-            }
-        }
-
-        private List<Establishment> _allEstablishments;
-
-        public ICommand DetailCommand { get; set; }
-
-        public StoresViewModel()
-        {
-            SearchCommand = new Command(Search); // O que será feito quando clicar no botão de OK
-            DetailCommand = new Command<Establishment>(Detail);
-
-            var allEstablishment = new EstablishmentService().GetEstablishments(); // Todos os Establishments
-            var allStores = allEstablishment.Where(a => a.Type == EstablishmentType.Store).ToList(); // Todos as Stores
-
-            Establishments = allStores;
-            _allEstablishments = allStores;
-        }
-
-        private void Search()
-        {
-            // Lógica para filtrar a lista de Lojas
-            Establishments = _allEstablishments.Where(a => a.Name.ToLower().Contains(SearchWord.ToLower())).ToList();
-        }
-
-        private void Detail(Establishment establishment)
-        {
-            String establishmentSerialized = JsonConvert.SerializeObject(establishment);
-
-            // Shell GoTo EstablishmentDetail
-            Shell.Current.GoToAsync($"establishment/detail?establishmentSerialized={Uri.EscapeDataString(establishmentSerialized)}"); // Apontando para a rota estabelecida no menu
         }
     }
 }
