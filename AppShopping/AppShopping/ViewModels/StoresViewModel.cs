@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using AppShopping.Libraries.Enums;
 using System.ComponentModel;
 using AppShopping.Helpers.MVVM;
+using Newtonsoft.Json;
 
 namespace AppShopping.ViewModels
 {
@@ -53,7 +54,10 @@ namespace AppShopping.ViewModels
 
         private void Detail(Establishment establishment)
         {
-            Shell.Current.GoToAsync("establishment/detail");
+            String establishmentSerialized = JsonConvert.SerializeObject(establishment);
+
+            // Shell GoTo EstablishmentDetail
+            Shell.Current.GoToAsync($"establishment/detail?establishmentSerialized={Uri.EscapeDataString(establishmentSerialized)}"); // Apontando para a rota estabelecida no menu
         }
     }
 }
