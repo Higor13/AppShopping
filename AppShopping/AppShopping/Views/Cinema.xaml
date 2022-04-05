@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:AppShopping.ViewModels"
+             x:Name="CinemaPage"
              x:Class="AppShopping.Views.Cinema">
     <Shell.TitleView>
         <ContentView>
@@ -17,7 +18,6 @@
         <StackLayout>
             <Label Text="Filmes no" Style="{StaticResource TitleType}" />
             <Label Text="CINEMA" Style="{StaticResource TitleName}" />
-        </StackLayout>
 
         <CollectionView ItemsSource="{Binding Films}" >
             <CollectionView.ItemTemplate>
@@ -37,5 +37,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
