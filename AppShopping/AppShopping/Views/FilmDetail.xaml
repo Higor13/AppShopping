@@ -17,12 +17,33 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="Filme" Style="{StaticResource TitleType}" />
-            <Label Text="1917" Style="{StaticResource TitleName}" />
+            <Label Text="{Binding Film.Name}" Style="{StaticResource TitleName}" />
             <Frame Padding="10" Margin="0, 15, 0, 15">
-                <Label Text="Descrição" />
+                <Label Text="{Binding Film.Description}" />
             </Frame>
+            
             <Label Text="Sessões" Style="{StaticResource TitleType}" />
-            <Label Text="Legendadas" Style="{StaticResource SessionTitle}" />
+            <CollectionView ItemsSource="{Binding Film.SessionGroups}" IsGrouped="True">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}" Style="{StaticResource SessionTitle}" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3" />
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame>
+                            <Label Text="{Binding .}" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--
             <CollectionView ItemsSource="{Binding SessionSubtitle}">
                 
             </CollectionView>
@@ -30,6 +51,7 @@
             <CollectionView ItemsSource="{Binding SessionDub}">
 
             </CollectionView>
+            -->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
