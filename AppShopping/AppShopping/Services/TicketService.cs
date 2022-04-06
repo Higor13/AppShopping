@@ -16,6 +16,12 @@ namespace AppShopping.Services
             new Ticket() { Number = "209883557324", StartDate = new DateTime(2020, 10, 20, 18, 56, 42) },
             new Ticket() { Number = "359645757789", StartDate = new DateTime(2021, 02, 08, 18, 10, 01) }
         };
+
+        public List<Ticket> GetTicketsPaid()
+        {
+            return fakeTickets.Where(a => a.Status == TicketStatus.paid).ToList();
+        }
+
         public Ticket GetTicketInfo(string number) // Simulando regra de negócio da API
         {
             var endDate = new DateTime(2020, 10, 20, 22, 00, 00);

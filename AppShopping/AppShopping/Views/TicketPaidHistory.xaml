@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppShopping.Views.TicketPaidHistory">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Style="{StaticResource TitleType}" Text="Tickets" />
+            <Label Style="{StaticResource TitleName}" Text="Pagos" />
+            <CollectionView ItemsSource="{Binding Tickets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame>
+                            <StackLayout>
+                                <Label Text="Ticket #135781354" />
+                                <Label Text="Permanência: 3h 10m" />
+                                <Label Text="Entrada: 12:00h" />
+                                <Label Text="Saída: 15:00h" />
+                                <Label Text="Valor: R$ 6,00" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
