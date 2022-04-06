@@ -13,6 +13,7 @@ namespace AppShopping.ViewModels
     public class TicketScanViewModel : BaseViewModel
     {
         public string TicketNumber { get; set; }
+        public ICommand TicketTextChangedCommand { get; set; }
         public ICommand TicketScanCommand { get; set; }
         private string _message;
         public string Message
@@ -32,6 +33,16 @@ namespace AppShopping.ViewModels
         {
             TicketScanCommand = new MvvmHelpers.Commands.AsyncCommand(TicketScan);
             TicketPaidHistoryCommand = new Command(TicketPaidHistory);
+            TicketTextChangedCommand = new Command(TicketTextChanged);
+        }
+
+        private void TicketTextChanged()
+        {
+            if(TicketNumber.Length == 15)
+            {
+                var ticketNumber = TicketNumber.Replace(" ", string.Empty);
+                TicketProcess(ticketNumber);
+            }
         }
 
         private async Task TicketScan()
@@ -53,6 +64,7 @@ namespace AppShopping.ViewModels
             await Shell.Current.Navigation.PushAsync(scanPage);
 
         }
+
         private void TicketProcess(string ticketNumber)
         {
             try
