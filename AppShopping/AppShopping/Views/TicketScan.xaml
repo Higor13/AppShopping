@@ -2,8 +2,9 @@
 <ContentPage
     x:Class="AppShopping.Views.TicketScan"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:viewModels="clr-namespace:AppShopping.ViewModels"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry"
+    xmlns:viewModels="clr-namespace:AppShopping.ViewModels">
 
     <Shell.TitleView>
         <ContentView>
@@ -32,20 +33,20 @@
                     BorderColor="{StaticResource BorderColor}"
                     CornerRadius="0"
                     HasShadow="False">
-                    <Entry 
-                        Placeholder="Escanear Ticket" 
+                    <control:MaskedEntry
+                        Mask="XXX XXX XXX XXX"
+                        Placeholder="Escanear Ticket"
                         Text="{Binding TicketNumber}" />
+                    <!--  Total de caracteres 15  -->
                 </Frame>
 
                 <Button
-                    Command="{Binding TicketScanCommand}"
                     Grid.Column="1"
+                    Command="{Binding TicketScanCommand}"
                     ImageSource="Camera"
                     Style="{StaticResource PrimaryButton}" />
             </Grid>
-            <Label 
-                Text="{Binding Message}" 
-                TextColor="{StaticResource ErrorColor}" />
+            <Label Text="{Binding Message}" TextColor="{StaticResource ErrorColor}" />
 
             <Button
                 Command="{Binding TicketPaidHistoryCommand}"
