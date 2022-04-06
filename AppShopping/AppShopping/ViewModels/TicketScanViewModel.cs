@@ -1,4 +1,5 @@
 ﻿using AppShopping.Helpers.MVVM;
+using AppShopping.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,7 +33,23 @@ namespace AppShopping.ViewModels
 
         private void TicketScan()
         {
+            // Camera - Scanear codigo de barras
 
+            TicketProcess("");
+        }
+        private void TicketProcess(string ticketNumber)
+        {
+            try
+            {
+                var ricket = new TicketService().GetTicketInfo(ticketNumber);
+
+                // Navegar para a pag de pagamento do ticket
+            }
+            catch (Exception e)
+            {
+
+                Message = e.Message;
+            }
         }
         private void TicketPaidHistory()
         {
