@@ -3,8 +3,10 @@ using AppShopping.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms;
 
 namespace AppShopping.ViewModels
 {
@@ -13,8 +15,9 @@ namespace AppShopping.ViewModels
         public string TicketNumber { get; set; }
         public ICommand TicketScanCommand { get; set; }
         private string _message;
-        public string Message { 
-            get 
+        public string Message
+        {
+            get
             {
                 return _message;
             }
@@ -27,15 +30,28 @@ namespace AppShopping.ViewModels
 
         public TicketScanViewModel()
         {
-            TicketScanCommand = new Command(TicketScan);
+            TicketScanCommand = new MvvmHelpers.Commands.AsyncCommand(TicketScan);
             TicketPaidHistoryCommand = new Command(TicketPaidHistory);
         }
 
-        private void TicketScan()
+        private async Task TicketScan()
         {
-            // Camera - Scanear codigo de barras
+            // Camera - Scanear codigo de barras (ZXing.Net.Mobile)
+            var scanPage = new ZXingScannerPage();
+            scanPage.OnScanResult += async (result) =>
+            {
+                scanPage.IsScanning = false;
 
-            TicketProcess("");
+                Device.BeginInvokeOnMainThread(async () => 
+                {
+                    await Shell.Current.Navigation.PopAsync();
+                    Message = result.Text;
+                    TicketProcess(result.Text);
+                });
+            };
+
+            await Shell.Current.Navigation.PushAsync(scanPage);
+
         }
         private void TicketProcess(string ticketNumber)
         {
