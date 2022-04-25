@@ -81,7 +81,7 @@ namespace AppShopping.ViewModels
         }
         private void TicketPaidHistory()
         {
-
+            Shell.Current.GoToAsync("ticket/paid/history");
         }
     }
 }
