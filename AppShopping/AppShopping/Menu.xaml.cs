@@ -16,10 +16,11 @@ namespace AppShopping
         {
             InitializeComponent();
 
-            // Registro da rota
+            // Registro das rotas
             Routing.RegisterRoute("establishment/detail", typeof(Views.EstablishmentDetail));
             Routing.RegisterRoute("film/detail", typeof(Views.FilmDetail));
             Routing.RegisterRoute("ticket/paid/history", typeof(Views.TicketPaidHistory));
+            Routing.RegisterRoute("ticket/payment", typeof(Views.TicketPayment));
         }
     }
 }

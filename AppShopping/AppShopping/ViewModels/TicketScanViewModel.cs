@@ -71,7 +71,7 @@ namespace AppShopping.ViewModels
             {
                 var ricket = new TicketService().GetTicketInfo(ticketNumber);
 
-                // Navegar para a pag de pagamento do ticket
+                Shell.Current.GoToAsync($"ticket/payment?number={ticketNumber}"); // Passando o número
             }
             catch (Exception e)
             {
