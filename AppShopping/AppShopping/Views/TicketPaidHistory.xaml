@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppShopping.Views.TicketPaidHistory"
              xmlns:converters="clr-namespace:AppShopping.Libraries.Converters"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:viewModels="clr-namespace:AppShopping.ViewModels">
 
     <Shell.TitleView>
@@ -32,8 +33,12 @@
             <CollectionView ItemsSource="{Binding Tickets}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame>
-                            <StackLayout>
+                        <ContentView Padding="0, 7">
+                            <yummy:PancakeView Padding="10" Margin="1" BackgroundColor="White">
+                                <yummy:PancakeView.Border>
+                                    <yummy:Border Color="#000000" Thickness="1" DashPattern="4,10" />
+                                </yummy:PancakeView.Border>
+                                <StackLayout>
                                 <Label>
                                     <Label.Text>
                                         <MultiBinding StringFormat="{}Ticket #{0}">
@@ -67,7 +72,8 @@
                                     </Label.Text>
                                 </Label>
                             </StackLayout>
-                        </Frame>
+                        </yummy:PancakeView>
+                        </ContentView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
