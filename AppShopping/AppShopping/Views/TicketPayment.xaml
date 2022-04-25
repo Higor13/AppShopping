@@ -18,6 +18,10 @@
         </ContentView>
     </Shell.TitleView>
 
+    <ContentPage.BindingContext>
+        <viewModels:TicketPaymentViewModel />
+    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:PassingTimeConverter x:Key="PassingTimeConverter" />
@@ -38,32 +42,32 @@
                     <Label Style="{StaticResource NameEstablishment}" FontSize="14" >
                         <Label.Text>
                             <MultiBinding StringFormat="{}Ticket #{0}">
-                                <Binding Path="Number" />
+                                <Binding Path="Ticket.Number" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
                     <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
                         <Label Text="Permanência: " Style="{StaticResource DescriptionEstablishment}" />
-                        <Label Text="{Binding ., Converter={StaticResource PassingTimeConverter}}" Style="{StaticResource DescriptionEstablishment}" />
+                        <Label Text="{Binding Ticket, Converter={StaticResource PassingTimeConverter}}" Style="{StaticResource DescriptionEstablishment}" />
                     </StackLayout>
                     <Label Style="{StaticResource DescriptionEstablishment}" >
                         <Label.Text>
                             <MultiBinding StringFormat="{}Entrada #{0}">
-                                <Binding Path="StartDate" />
+                                <Binding Path="Ticket.StartDate" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
                     <Label Style="{StaticResource DescriptionEstablishment}" >
                         <Label.Text>
                             <MultiBinding StringFormat="{}Saida #{0}">
-                                <Binding Path="EndDate" />
+                                <Binding Path="Ticket.EndDate" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
                     <Label Style="{StaticResource Subtitle}" FontSize="12" >
                         <Label.Text>
                             <MultiBinding StringFormat="{}Valor: R$ {0}">
-                                <Binding Path="Price" />
+                                <Binding Path="Ticket.Price" />
                             </MultiBinding>
                         </Label.Text>
                     </Label>
@@ -89,11 +93,11 @@
 
                     <Grid ColumnDefinitions="*,*">
                         <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <Entry Placeholder="Número do cartão" />
+                            <control:MaskedEntry Mask="XX/XXXX" Placeholder="Validade" />
                         </Frame>
 
                         <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <Entry Placeholder="Número do cartão" />
+                            <control:MaskedEntry Mask="XXX" Placeholder="Cod. Segurança" />
                         </Frame>
                     </Grid>
 
