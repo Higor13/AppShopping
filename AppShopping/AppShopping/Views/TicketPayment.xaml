@@ -29,86 +29,88 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Label Style="{StaticResource TitleType}" Text="Pague o seu" />
-            <Label Style="{StaticResource TitleName}" Text="TICKET" />
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label Style="{StaticResource TitleType}" Text="Pague o seu" />
+                <Label Style="{StaticResource TitleName}" Text="TICKET" />
 
-            <!-- Info do ticket -->
-            <yummy:PancakeView Padding="10" Margin="1" BackgroundColor="White">
-                <yummy:PancakeView.Border>
-                    <yummy:Border Color="#000000" Thickness="1" DashPattern="4,10" />
-                </yummy:PancakeView.Border>
-                <StackLayout>
-                    <Label Style="{StaticResource NameEstablishment}" FontSize="14" >
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}Ticket #{0}">
-                                <Binding Path="Ticket.Number" />
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
-                        <Label Text="Permanência: " Style="{StaticResource DescriptionEstablishment}" />
-                        <Label Text="{Binding Ticket, Converter={StaticResource PassingTimeConverter}}" Style="{StaticResource DescriptionEstablishment}" />
+                <!-- Info do ticket -->
+                <yummy:PancakeView Padding="10" Margin="1" BackgroundColor="White">
+                    <yummy:PancakeView.Border>
+                        <yummy:Border Color="#000000" Thickness="1" DashPattern="4,10" />
+                    </yummy:PancakeView.Border>
+                    <StackLayout>
+                        <Label Style="{StaticResource NameEstablishment}" FontSize="14" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}Ticket #{0}">
+                                    <Binding Path="Ticket.Number" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                            <Label Text="Permanência: " Style="{StaticResource DescriptionEstablishment}" />
+                            <Label Text="{Binding Ticket, Converter={StaticResource PassingTimeConverter}}" Style="{StaticResource DescriptionEstablishment}" />
+                        </StackLayout>
+                        <Label Style="{StaticResource DescriptionEstablishment}" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}Entrada #{0}">
+                                    <Binding Path="Ticket.StartDate" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Style="{StaticResource DescriptionEstablishment}" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}Saida #{0}">
+                                    <Binding Path="Ticket.EndDate" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                        <Label Style="{StaticResource Subtitle}" FontSize="12" >
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}Valor: R$ {0}">
+                                    <Binding Path="Ticket.Price" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
                     </StackLayout>
-                    <Label Style="{StaticResource DescriptionEstablishment}" >
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}Entrada #{0}">
-                                <Binding Path="Ticket.StartDate" />
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                    <Label Style="{StaticResource DescriptionEstablishment}" >
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}Saida #{0}">
-                                <Binding Path="Ticket.EndDate" />
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                    <Label Style="{StaticResource Subtitle}" FontSize="12" >
-                        <Label.Text>
-                            <MultiBinding StringFormat="{}Valor: R$ {0}">
-                                <Binding Path="Ticket.Price" />
-                            </MultiBinding>
-                        </Label.Text>
-                    </Label>
-                </StackLayout>
-            </yummy:PancakeView>
+                </yummy:PancakeView>
 
-            <!-- Cartão de crédito -->
-            <yummy:PancakeView>
-                <yummy:PancakeView.Border>
-                    <yummy:Border Color="#000000" Thickness="1" DashPattern="4,10" />
-                </yummy:PancakeView.Border>
-                <StackLayout>
-                    <Label Style="{StaticResource NameEstablishment}" FontSize="14" Text="Cartão de Crédito" />
-                    <Label Text="Coloque o cartão de crédito para pagar o estacionamento" Style="{StaticResource DescriptionEstablishment}" />
+                <!-- Cartão de crédito -->
+                <yummy:PancakeView Padding="10" Margin="1" BackgroundColor="White">
+                    <yummy:PancakeView.Border>
+                        <yummy:Border Color="#000000" Thickness="1" DashPattern="4,10" />
+                    </yummy:PancakeView.Border>
+                    <StackLayout>
+                        <Label Style="{StaticResource NameEstablishment}" FontSize="14" Text="Cartão de Crédito" />
+                        <Label Text="Coloque o cartão de crédito para pagar o estacionamento" Style="{StaticResource DescriptionEstablishment}" />
 
-                    <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                        <Entry Placeholder="Nome no cartão" />
-                    </Frame>
-
-                    <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                        <Entry Placeholder="Número do cartão" />
-                    </Frame>
-
-                    <Grid ColumnDefinitions="*,*">
                         <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <control:MaskedEntry Mask="XX/XXXX" Placeholder="Validade" />
+                            <Entry Placeholder="Nome no cartão" Style="{StaticResource EntryPayment}" />
                         </Frame>
+
+                        <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
+                            <Entry Placeholder="Número do cartão" Style="{StaticResource EntryPayment}" />
+                        </Frame>
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="50">
+                            <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
+                                <control:MaskedEntry Mask="XX/XXXX" Placeholder="Validade" Style="{StaticResource EntryPayment}" />
+                            </Frame>
+
+                            <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
+                                <control:MaskedEntry Mask="XXX" Placeholder="Cod. Segurança" Style="{StaticResource EntryPayment}" />
+                            </Frame>
+                        </Grid>
 
                         <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <control:MaskedEntry Mask="XXX" Placeholder="Cod. Segurança" />
+                            <control:MaskedEntry Mask="XXX.XXX.XXX-XX" Placeholder="CPF" Style="{StaticResource EntryPayment}" />
                         </Frame>
-                    </Grid>
 
-                    <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                        <control:MaskedEntry Mask="XXX.XXX.XXX-XX" Placeholder="CPF" />
-                    </Frame>
-
-                    <Label Text="Usaremos este CPF para emitir nota legal" />
-                </StackLayout>
-            </yummy:PancakeView>
-            <Button Text="Pagar" Style="{StaticResource TicketPaidButton}" />
-        </StackLayout>
+                        <Label Text="Usaremos este CPF para emitir nota legal" />
+                    </StackLayout>
+                </yummy:PancakeView>
+                <Button Text="Pagar" Style="{StaticResource TicketPaidButton}" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
