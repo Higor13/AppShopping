@@ -85,25 +85,25 @@
                         <Label Text="Coloque o cartão de crédito para pagar o estacionamento" Style="{StaticResource DescriptionEstablishment}" />
 
                         <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <Entry Placeholder="Nome no cartão" Style="{StaticResource EntryPayment}" />
+                            <Entry Placeholder="Nome no cartão" Text="{Binding CreditCard.Name}" Style="{StaticResource EntryPayment}" />
                         </Frame>
 
                         <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <Entry Placeholder="Número do cartão" Style="{StaticResource EntryPayment}" />
+                            <control:MaskedEntry Mask="XXXX XXXX XXXX XXXX" Placeholder="Número do cartão" Text="{Binding CreditCard.Number}" Style="{StaticResource EntryPayment}" />
                         </Frame>
 
                         <Grid ColumnDefinitions="*,*" RowDefinitions="50">
                             <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                                <control:MaskedEntry Mask="XX/XXXX" Placeholder="Validade" Style="{StaticResource EntryPayment}" />
+                                <control:MaskedEntry Mask="XX/XXXX" Placeholder="Validade" Text="{Binding CreditCard.Expire}" Style="{StaticResource EntryPayment}" />
                             </Frame>
 
                             <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                                <control:MaskedEntry Mask="XXX" Placeholder="Cod. Segurança" Style="{StaticResource EntryPayment}" />
+                                <control:MaskedEntry Mask="XXX" Placeholder="Cod. Segurança" Text="{Binding CreditCard.SecurityCode}" Style="{StaticResource EntryPayment}" />
                             </Frame>
                         </Grid>
 
                         <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <control:MaskedEntry Mask="XXX.XXX.XXX-XX" Placeholder="CPF" Style="{StaticResource EntryPayment}" />
+                            <control:MaskedEntry Mask="XXX.XXX.XXX-XX" Placeholder="CPF" Text="{Binding CreditCard.Document}" Style="{StaticResource EntryPayment}" />
                         </Frame>
 
                         <Label Text="Usaremos este CPF para emitir nota legal" />

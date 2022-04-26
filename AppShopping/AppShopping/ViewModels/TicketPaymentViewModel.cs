@@ -4,6 +4,7 @@ using AppShopping.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace AppShopping.ViewModels
@@ -31,11 +32,31 @@ namespace AppShopping.ViewModels
                 SetProperty(ref _ticket, value);
             }
         }
+        private CreditCard _creditCard;
+
+        public CreditCard CreditCard
+        {
+            get { return _creditCard; }
+            set 
+            {
+                SetProperty(ref _creditCard, value);
+            }
+        }
+
+        public ICommand PaymentCommand { get; set; }
 
         private TicketService _ticketService;
         public TicketPaymentViewModel()
         {
             _ticketService = new TicketService();
+        }
+
+        private void Payment()
+        {
+            // TODO - Implementar
+            // TODO - Validar
+            // TODO - Integração com um serviço API
+            // TODO - Colocar msg de erro (Redirecionar)
         }
     }
 }
