@@ -8,7 +8,7 @@ namespace AppShopping.Models
     {
         public string Name { get; set; }
         public string Number { get; set; }
-        public DateTime Expire { get; set; }
+        public string Expire { get; set; } // Seguir formato do provedor de pagamento
         public string SecurityCode { get; set; }
         public string Document { get; set; }
     }
