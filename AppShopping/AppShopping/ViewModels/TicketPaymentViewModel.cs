@@ -46,17 +46,30 @@ namespace AppShopping.ViewModels
         public ICommand PaymentCommand { get; set; }
 
         private TicketService _ticketService;
+        private PaymentService _paymentService;
         public TicketPaymentViewModel()
         {
             _ticketService = new TicketService();
+            _paymentService = new PaymentService();
+
+            CreditCard = new CreditCard();
+
+            PaymentCommand = new Command(Payment);
         }
 
         private void Payment()
         {
-            // TODO - Implementar
             // TODO - Validar
-            // TODO - Integração com um serviço API
-            // TODO - Colocar msg de erro (Redirecionar)
+            try
+            {
+                int paymentId = _paymentService.SendPayment(CreditCard);
+
+                // TODO - Redirecionar para a tela de sucesso
+            }
+            catch (Exception e)
+            {
+                // TODO - Colocar msg de erro (Redirecionar para tela de erro)
+            }
         }
     }
 }
