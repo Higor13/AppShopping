@@ -4,8 +4,9 @@
              xmlns:converters="clr-namespace:AppShopping.Libraries.Converters"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry"
+             xmlns:behaviors="clr-namespace:AppShopping.Libraries.Behaviors"
              xmlns:viewModels="clr-namespace:AppShopping.ViewModels"
-             x:Class="AppShopping.Views.TicketPayment">
+             x:Class="AppShopping.Views.TicketPaymentSucess">
 
     <Shell.TitleView>
         <ContentView>
@@ -74,42 +75,12 @@
                     </StackLayout>
                 </yummy:PancakeView>
 
-                <!-- Cartão de crédito -->
-                <yummy:PancakeView Padding="10" Margin="1" BackgroundColor="White">
-                    <yummy:PancakeView.Border>
-                        <yummy:Border Color="#000000" Thickness="1" DashPattern="4,10" />
-                    </yummy:PancakeView.Border>
-                    <StackLayout>
-                        <Label Style="{StaticResource NameEstablishment}" FontSize="14" Text="Cartão de Crédito" />
-                        <Label Text="Coloque o cartão de crédito para pagar o estacionamento" Style="{StaticResource DescriptionEstablishment}" />
-                        <Label Text="{Binding Messages}" Style="{StaticResource DescriptionEstablishment}" TextColor="Red" />
+                <Label Text="Pagamento aprovado" Style="{StaticResource TitleType}" TextColor="#1BAB42" />
+                <Label Text="Tolerância" Style="{StaticResource TitleType}" />
+                <Label Text="30 min" Style="{StaticResource TitleType}" FontSize="38" />
 
-                        <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <Entry Placeholder="Nome no cartão" Text="{Binding CreditCard.Name}" Style="{StaticResource EntryPayment}" />
-                        </Frame>
+                <Button Text="OK" Style="{StaticResource TicketPaidButton}" WidthRequest="115" HorizontalOptions="Center" />
 
-                        <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <control:MaskedEntry Mask="XXXX XXXX XXXX XXXX" Keyboard="Numeric" Placeholder="Número do cartão" Text="{Binding CreditCard.Number}" Style="{StaticResource EntryPayment}" />
-                        </Frame>
-
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="50">
-                            <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                                <control:MaskedEntry Mask="XX/XXXX" Keyboard="Numeric" Placeholder="Validade" Text="{Binding CreditCard.Expire}" Style="{StaticResource EntryPayment}" />
-                            </Frame>
-
-                            <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                                <control:MaskedEntry Mask="XXX" Keyboard="Numeric" Placeholder="Cod. Segurança" Text="{Binding CreditCard.SecurityCode}" Style="{StaticResource EntryPayment}" />
-                            </Frame>
-                        </Grid>
-
-                        <Frame Padding="10,0" Grid.Column="1" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <control:MaskedEntry Mask="XXX.XXX.XXX-XX" Keyboard="Numeric" Placeholder="CPF" Text="{Binding CreditCard.Document}" Style="{StaticResource EntryPayment}" />
-                        </Frame>
-
-                        <Label Text="Usaremos este CPF para emitir nota legal" />
-                    </StackLayout>
-                </yummy:PancakeView>
-                <Button Text="Pagar" Style="{StaticResource TicketPaidButton}" Command="{Binding PaymentCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
