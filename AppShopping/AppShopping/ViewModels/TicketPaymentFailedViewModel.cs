@@ -10,8 +10,20 @@ using Xamarin.Forms;
 namespace AppShopping.ViewModels
 {
     [QueryProperty("Number", "number")]
+    [QueryProperty("Message", "message")]
     public class TicketPaymentFailedViewModel : BaseViewModel
     {
+        private string _message;
+
+        public string Message
+        {
+            get { return _message; }
+            set 
+            { 
+                SetProperty(ref _message, value);
+            }
+        }
+
         private Ticket _ticket;
 
         public Ticket Ticket

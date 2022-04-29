@@ -103,7 +103,7 @@ namespace AppShopping.ViewModels
             catch (Exception e)
             {
                 // Colocar msg de erro (Redirecionar para tela de erro)
-                await Shell.Current.GoToAsync($"ticket/payment/failed?number={Ticket.Number}");
+                await Shell.Current.GoToAsync($"ticket/payment/failed?number={Ticket.Number}&message={e.Message}");
             }
         }
         private string Valid(CreditCard creditCard)
