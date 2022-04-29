@@ -120,14 +120,21 @@ namespace AppShopping.ViewModels
                 messages.Append("O numero do cartão está incompleto!" + Environment.NewLine);
             }
             
-            // TODO - Verificar se cartão já está expirado
             try
             {
                 var expiredString = creditCard.Expire.Split('/');
                 var month = int.Parse(expiredString[0]);
                 var year = int.Parse(expiredString[1]);
 
-                new DateTime(year, month, 01);
+                // Verificar se cartão já está expirado
+
+                var expireDate = new DateTime(year, month, 01);
+                var now = DateTime.Now;
+
+                if (expireDate.Year < now.Year || (expireDate.Month < now.Month && expireDate.Year == now.Year))
+                {
+                    messages.Append("Cartão expirado!" + Environment.NewLine);
+                }
             }
             catch (Exception e)
             {
