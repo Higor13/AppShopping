@@ -1,4 +1,5 @@
 ﻿using AppShopping.Helpers.MVVM;
+using AppShopping.Libraries.Validators;
 using AppShopping.Models;
 using AppShopping.Services;
 using System;
@@ -12,6 +13,17 @@ namespace AppShopping.ViewModels
     [QueryProperty("Number", "number")] // Sempre que trocar para essa tela, receber o número do ticket escaneado
     public class TicketPaymentViewModel : BaseViewModel
     {
+        private string _messages;
+
+        public string Messages
+        {
+            get { return _messages; }
+            set 
+            { 
+                SetProperty(ref _messages, value);
+            }
+        }
+
         private string _number;
         public String Number
         {
@@ -59,12 +71,23 @@ namespace AppShopping.ViewModels
 
         private void Payment()
         {
-            // TODO - Validar - Manual, Data Annotations e Fluent Validation*
+            // Tipos de Validação: Manual, Data Annotations e Fluent Validation*
             try
             {
-                int paymentId = _paymentService.SendPayment(CreditCard);
+                Messages = string.Empty;
 
-                // TODO - Redirecionar para a tela de sucesso
+                string messages = Valid(CreditCard);
+
+                if (string.IsNullOrEmpty(messages))
+                {
+                    // Redirecionar para a tela de sucesso
+                    int paymentId = _paymentService.SendPayment(CreditCard);
+                }
+                else
+                {
+                    Messages = messages;
+                }
+
             }
             catch (Exception e)
             {
@@ -119,47 +142,12 @@ namespace AppShopping.ViewModels
             {
                 messages.Append("O CPF está incompleto!" + Environment.NewLine);
             }
-            else if (IsCpf(creditCard.Document))
+            else if (CpfValidator.IsCpf(creditCard.Document))
             {
                 messages.Append("O CPF é inválido!" + Environment.NewLine);
             }
 
             return messages.ToString();
-        }
-        public bool IsCpf(string cpf)
-        {
-            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            string tempCpf;
-            string digito;
-            int soma;
-            int resto;
-            cpf = cpf.Trim();
-            cpf = cpf.Replace(".", "").Replace("-", "");
-            if (cpf.Length != 11)
-                return false;
-            tempCpf = cpf.Substring(0, 9);
-            soma = 0;
-
-            for (int i = 0; i < 9; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
-            resto = soma % 11;
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-            digito = resto.ToString();
-            tempCpf = tempCpf + digito;
-            soma = 0;
-            for (int i = 0; i < 10; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
-            resto = soma % 11;
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-            digito = digito + resto.ToString();
-            return cpf.EndsWith(digito);
         }
     }
 }

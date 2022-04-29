@@ -83,6 +83,7 @@
                     <StackLayout>
                         <Label Style="{StaticResource NameEstablishment}" FontSize="14" Text="Cartão de Crédito" />
                         <Label Text="Coloque o cartão de crédito para pagar o estacionamento" Style="{StaticResource DescriptionEstablishment}" />
+                        <Label Text="{Binding Messages}" Style="{StaticResource DescriptionEstablishment}" TextColor="Red" />
 
                         <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
                             <Entry Placeholder="Nome no cartão" Text="{Binding CreditCard.Name}" Style="{StaticResource EntryPayment}" />
@@ -109,7 +110,7 @@
                         <Label Text="Usaremos este CPF para emitir nota legal" />
                     </StackLayout>
                 </yummy:PancakeView>
-                <Button Text="Pagar" Style="{StaticResource TicketPaidButton}" />
+                <Button Text="Pagar" Style="{StaticResource TicketPaidButton}" Command="{Binding PaymentCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
