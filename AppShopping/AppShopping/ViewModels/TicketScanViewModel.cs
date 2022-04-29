@@ -69,7 +69,7 @@ namespace AppShopping.ViewModels
         {
             try
             {
-                var ricket = new TicketService().GetTicketInfo(ticketNumber);
+                var ricket = new TicketService().GetTicketToPaid(ticketNumber);
 
                 Shell.Current.GoToAsync($"ticket/payment?number={ticketNumber}"); // Passando o número
             }

@@ -19,7 +19,7 @@
     </Shell.TitleView>
 
     <ContentPage.BindingContext>
-        <viewModels:TicketPaymentViewModel />
+        <viewModels:TicketPaymentSucessViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
@@ -75,11 +75,11 @@
                     </StackLayout>
                 </yummy:PancakeView>
 
-                <Label Text="Pagamento aprovado" Style="{StaticResource TitleType}" TextColor="#1BAB42" />
-                <Label Text="Tolerância" Style="{StaticResource TitleType}" />
-                <Label Text="30 min" Style="{StaticResource TitleType}" FontSize="38" />
+                <Label Text="Pagamento aprovado" HorizontalOptions="Center" Style="{StaticResource TitleType}" TextColor="#1BAB42" />
+                <Label Text="Tolerância" Margin="0, 20, 0, 5" HorizontalOptions="Center" Style="{StaticResource TitleType}" />
+                <Label Text="30 min" HorizontalOptions="Center" Style="{StaticResource TitleName}" FontSize="38" />
 
-                <Button Text="OK" Style="{StaticResource TicketPaidButton}" WidthRequest="115" HorizontalOptions="Center" />
+                <Button Text="OK" Margin="0, 20, 0, 0" Style="{StaticResource TicketPaidButton}" Command="{Binding OkCommand}" WidthRequest="115" HorizontalOptions="Center" />
 
             </StackLayout>
         </ScrollView>

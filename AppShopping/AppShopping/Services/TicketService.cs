@@ -29,9 +29,12 @@ namespace AppShopping.Services
             oldTicket.Status = newTicket.Status;
             oldTicket.Price = newTicket.Price;
             oldTicket.EndDate = newTicket.EndDate;
+            // Enviar para o servidor a atualização do Ticket (API)
+
         }
 
-        public Ticket GetTicketInfo(string number) // Simulando regra de negócio da API
+
+        public Ticket GetTicketToPaid(string number) // Simulando regra de negócio da API
         {
             //var endDate = new DateTime(2020, 10, 20, 22, 00, 00);
             var endDate = DateTime.Now;
@@ -47,6 +50,15 @@ namespace AppShopping.Services
             ticket.EndDate = endDate;
 
             ticket.Price = Convert.ToDecimal(PriceCalculator(ticket));
+
+            return ticket;
+        }
+        public Ticket GetTicket(string number)
+        {
+            var ticket = fakeTickets.FirstOrDefault(a => a.Number == number);
+
+            if (ticket == null)
+                throw new Exception("Ticket não encontrado");
 
             return ticket;
         }

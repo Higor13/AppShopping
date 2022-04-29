@@ -2,9 +2,11 @@
 using AppShopping.Libraries.Validators;
 using AppShopping.Models;
 using AppShopping.Services;
+using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -32,7 +34,7 @@ namespace AppShopping.ViewModels
                 SetProperty(ref _number, value);
 
                 // Pesquisar ticket e jogar na tela
-                Ticket = _ticketService.GetTicketInfo(value);
+                Ticket = _ticketService.GetTicketToPaid(value);
             }
         }
         private Ticket _ticket;
@@ -66,10 +68,10 @@ namespace AppShopping.ViewModels
 
             CreditCard = new CreditCard();
 
-            PaymentCommand = new Command(Payment);
+            PaymentCommand = new AsyncCommand(Payment);
         }
 
-        private void Payment()
+        private async Task Payment()
         {
             // Tipos de Validação: Manual, Data Annotations e Fluent Validation*
             try
@@ -84,11 +86,12 @@ namespace AppShopping.ViewModels
                     Ticket.TransactionId = paymentId;
                     Ticket.Status = Libraries.Enums.TicketStatus.paid;
 
-                    var x = _ticketService.GetTicketsPaid();
 
-                    // TODO - Salvar info no db
+                    // Salvar info no db
+                    //_ticketService.UpdateTicket(Ticket); // Atualizar no servidor
 
-                    // TODO - Redirecionar para a tela de sucesso
+                    // Redirecionar para a tela de sucesso
+                     await Shell.Current.GoToAsync($"ticket/payment/sucess?number={Ticket.Number}");
 
                 }
                 else
@@ -99,7 +102,8 @@ namespace AppShopping.ViewModels
             }
             catch (Exception e)
             {
-                // TODO - Colocar msg de erro (Redirecionar para tela de erro)
+                // Colocar msg de erro (Redirecionar para tela de erro)
+                await Shell.Current.GoToAsync($"ticket/payment/failed?number={Ticket.Number}");
             }
         }
         private string Valid(CreditCard creditCard)
