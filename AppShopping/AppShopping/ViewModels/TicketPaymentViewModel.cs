@@ -80,8 +80,16 @@ namespace AppShopping.ViewModels
 
                 if (string.IsNullOrEmpty(messages))
                 {
-                    // Redirecionar para a tela de sucesso
-                    int paymentId = _paymentService.SendPayment(CreditCard);
+                    string paymentId = _paymentService.SendPayment(CreditCard, Ticket);
+                    Ticket.TransactionId = paymentId;
+                    Ticket.Status = Libraries.Enums.TicketStatus.paid;
+
+                    var x = _ticketService.GetTicketsPaid();
+
+                    // TODO - Salvar info no db
+
+                    // TODO - Redirecionar para a tela de sucesso
+
                 }
                 else
                 {
@@ -112,13 +120,14 @@ namespace AppShopping.ViewModels
                 messages.Append("O numero do cartão está incompleto!" + Environment.NewLine);
             }
             
+            // TODO - Verificar se cartão já está expirado
             try
             {
                 var expiredString = creditCard.Expire.Split('/');
                 var month = int.Parse(expiredString[0]);
                 var year = int.Parse(expiredString[1]);
 
-                new DateTime(month, year, 01);
+                new DateTime(year, month, 01);
             }
             catch (Exception e)
             {
@@ -142,7 +151,7 @@ namespace AppShopping.ViewModels
             {
                 messages.Append("O CPF está incompleto!" + Environment.NewLine);
             }
-            else if (CpfValidator.IsCpf(creditCard.Document))
+            else if (!CpfValidator.IsCpf(creditCard.Document))
             {
                 messages.Append("O CPF é inválido!" + Environment.NewLine);
             }

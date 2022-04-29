@@ -9,7 +9,7 @@ namespace AppShopping.Services
 {
     public class TicketService
     {
-        List<Ticket> fakeTickets = new List<Ticket>()
+        private static List<Ticket> fakeTickets = new List<Ticket>()
         {
             new Ticket() { Number = "109703757667", StartDate = new DateTime(2020, 10, 20, 16, 02, 32), EndDate = new DateTime(2020, 10, 20, 17, 15, 45), Price = 6.20m, Status = TicketStatus.paid },
             new Ticket() { Number = "109703757669", StartDate = new DateTime(2020, 10, 22, 10, 02, 32), EndDate = new DateTime(2020, 10, 22, 17, 30, 00), Price = 12.20m, Status = TicketStatus.paid },
@@ -20,6 +20,15 @@ namespace AppShopping.Services
         public List<Ticket> GetTicketsPaid()
         {
             return fakeTickets.Where(a => a.Status == TicketStatus.paid).ToList();
+        }
+
+        public void UpdateTicket(Ticket newTicket) // Atualizando o ticket359645757789
+        {
+            var oldTicket = fakeTickets.FirstOrDefault(a => a.Number == newTicket.Number);
+            oldTicket.TransactionId = newTicket.TransactionId;
+            oldTicket.Status = newTicket.Status;
+            oldTicket.Price = newTicket.Price;
+            oldTicket.EndDate = newTicket.EndDate;
         }
 
         public Ticket GetTicketInfo(string number) // Simulando regra de negócio da API
