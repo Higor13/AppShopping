@@ -78,6 +78,21 @@ namespace AppShopping.ViewModels
             var cardInfo = await CrossPayCards.Current.ScanAsync();
 
             await App.Current.MainPage.DisplayAlert("Result", $"{cardInfo.HolderName}\n{cardInfo.CardNumber}\n{cardInfo.ExpirationDate}", "Ok");
+
+            if (string.IsNullOrEmpty(cardInfo.CardNumber))
+            {
+                CreditCard.Number = cardInfo.CardNumber;
+            }
+            if (string.IsNullOrEmpty(cardInfo.HolderName))
+            {
+                CreditCard.Name = cardInfo.HolderName;
+            }
+            if (string.IsNullOrEmpty(cardInfo.ExpirationDate))
+            {
+                CreditCard.Expire = cardInfo.ExpirationDate;
+            }
+
+            OnPropertyChanged(nameof(CreditCard));
         }
 
         private async Task Payment()
@@ -135,15 +150,16 @@ namespace AppShopping.ViewModels
             
             try
             {
+                var firstTwoCharYear = DateTime.Now.ToString().Substring(0, 2);
+
                 var expiredString = creditCard.Expire.Split('/');
                 var month = int.Parse(expiredString[0]);
-                var year = int.Parse(expiredString[1]);
-
-                // Verificar se cartão já está expirado
+                var year = int.Parse(firstTwoCharYear + expiredString[1]);
 
                 var expireDate = new DateTime(year, month, 01);
                 var now = DateTime.Now;
 
+                // Verificar se cartão já está expirado
                 if (expireDate.Year < now.Year || (expireDate.Month < now.Month && expireDate.Year == now.Year))
                 {
                     messages.Append("Cartão expirado!" + Environment.NewLine);
