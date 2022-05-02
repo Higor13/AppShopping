@@ -60,7 +60,7 @@ namespace AppShopping.ViewModels
 
         private void Ok()
         {
-            Shell.Current.Navigation.PopToRootAsync(); // Volta a tela inicial (tela pague seu ticket)
+            Shell.Current.Navigation.PopAsync(); // Volta a tela inicial (tela pague seu ticket)
         }
     }
 }
