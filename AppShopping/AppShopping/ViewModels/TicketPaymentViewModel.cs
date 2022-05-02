@@ -4,8 +4,8 @@ using AppShopping.Models;
 using AppShopping.Services;
 using MvvmHelpers.Commands;
 using System;
-using System.Collections.Generic;
 using System.Text;
+using Plugin.PayCards;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -58,6 +58,7 @@ namespace AppShopping.ViewModels
         }
 
         public ICommand PaymentCommand { get; set; }
+        public ICommand CreditCardScanCommand { get; set; }
 
         private TicketService _ticketService;
         private PaymentService _paymentService;
@@ -69,6 +70,14 @@ namespace AppShopping.ViewModels
             CreditCard = new CreditCard();
 
             PaymentCommand = new AsyncCommand(Payment);
+            CreditCardScanCommand = new AsyncCommand(CredCardScan);
+        }
+
+        private async Task CredCardScan()
+        {
+            var cardInfo = await CrossPayCards.Current.ScanAsync();
+
+            await App.Current.MainPage.DisplayAlert("Result", $"{cardInfo.HolderName}\n{cardInfo.CardNumber}\n{cardInfo.ExpirationDate}", "Ok");
         }
 
         private async Task Payment()

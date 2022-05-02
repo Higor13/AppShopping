@@ -89,7 +89,10 @@
                         </Frame>
 
                         <Frame Padding="10,0" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                            <control:MaskedEntry Mask="XXXX XXXX XXXX XXXX" Keyboard="Numeric" Placeholder="Número do cartão" Text="{Binding CreditCard.Number}" Style="{StaticResource EntryPayment}" />
+                            <Grid ColumnDefinitions="*, 25">
+                                <control:MaskedEntry Mask="XXXX XXXX XXXX XXXX" Keyboard="Numeric" Placeholder="Número do cartão" Text="{Binding CreditCard.Number}" Style="{StaticResource EntryPayment}" />
+                                <ImageButton Source="photograph" BackgroundColor="Transparent" Command="{Binding CreditCardScanCommand}" Grid.Column="1" />
+                            </Grid>
                         </Frame>
 
                         <Grid ColumnDefinitions="*,*" RowDefinitions="50">
