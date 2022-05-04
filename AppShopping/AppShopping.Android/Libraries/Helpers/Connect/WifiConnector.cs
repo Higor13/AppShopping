@@ -39,10 +39,12 @@ namespace AppShopping.Droid.Libraries.Helpers.Connect
 
             if (network == null)
             {
-                wifiManager.Disconnect();
-                var enableNetwork = wifiManager.EnableNetwork(network.NetworkId, true);
-                return;
+                throw new Exception($"Cannot connect to network: {ssid}");
             }
+
+            wifiManager.Disconnect();
+            var enableNetwork = wifiManager.EnableNetwork(network.NetworkId, true);
+            wifiManager.Reconnect();
         }
     }
 }
