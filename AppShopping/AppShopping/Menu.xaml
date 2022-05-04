@@ -2,7 +2,13 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:AppShopping.Views"
+             xmlns:viewModels="clr-namespace:AppShopping.ViewModels"
              x:Class="AppShopping.Menu">
+
+    <Shell.BindingContext>
+        <viewModels:MenuViewModel />
+    </Shell.BindingContext>
+    
     <Shell.FlyoutHeader>
         <Grid ColumnDefinitions="1*,2*" RowDefinitions="Auto, Auto" Padding="0, 25" BackgroundColor="{StaticResource PrimaryColor}" >
             <Image Source="BagWhite" Grid.RowSpan="2" />
@@ -17,7 +23,8 @@
         <ShellContent Title="Ticket" Icon="MenuIconTicket" ContentTemplate="{DataTemplate views:TicketScan}" />
     </FlyoutItem>
     <ShellContent Title="Novidades" Icon="MenuIconNews" ContentTemplate="{DataTemplate views:News}" />
-    <ShellContent Title="Como chegar" Icon="MenuIconMaps" ContentTemplate="{DataTemplate views:Stores}" />
+    <!-- <ShellContent Title="Como chegar" Icon="MenuIconMaps" ContentTemplate="{DataTemplate views:Stores}" /> -->
+    <MenuItem Text="Como chegar" IconImageSource="MenuIconMaps" Command="{Binding OpenMapCommand}" />
     <ShellContent Title="Wifi" Icon="MenuIconWifi" ContentTemplate="{DataTemplate views:Wifi}" />
-    <ShellContent Title="Film Detail" Icon="MenuIconWifi" ContentTemplate="{DataTemplate views:FilmDetail}" />
+    <!-- <ShellContent Title="Film Detail" Icon="MenuIconWifi" ContentTemplate="{DataTemplate views:FilmDetail}" /> -->
 </Shell>
