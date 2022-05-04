@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Net.Wifi;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -16,9 +17,32 @@ namespace AppShopping.Droid.Libraries.Helpers.Connect
 {
     public class WifiConnector : IWifiConnector
     {
+        [Obsolete]
         public void ConnectToWifi(string ssid, string password)
         {
-            throw new NotImplementedException();
+            var wifiManager = (WifiManager)Android.App.Application.Context
+                        .GetSystemService(Context.WifiService);
+
+            var formattedSsid = $"\"{ssid}\"";
+            var formattedPassword = $"\"{password}\"";
+
+            var wifiConfig = new WifiConfiguration
+            {
+                Ssid = formattedSsid,
+                PreSharedKey = formattedPassword
+            };
+
+            var addNetwork = wifiManager.AddNetwork(wifiConfig);
+
+            var network = wifiManager.ConfiguredNetworks
+                 .FirstOrDefault(n => n.Ssid == $"\"{ssid}\"");
+
+            if (network == null)
+            {
+                wifiManager.Disconnect();
+                var enableNetwork = wifiManager.EnableNetwork(network.NetworkId, true);
+                return;
+            }
         }
     }
 }
