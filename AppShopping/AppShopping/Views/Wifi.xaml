@@ -15,7 +15,7 @@
     </Shell.TitleView>
 
     <ContentPage.BindingContext>
-        <viewModels:NewsViewModel />
+        <viewModels:WifiViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
@@ -24,10 +24,10 @@
             <Label Text="Para você" Style="{StaticResource TitleName}" />
 
             <Frame Padding="10,0" Margin="0, 40" BorderColor="{StaticResource BorderColor}" CornerRadius="0" HasShadow="False">
-                <Entry Placeholder="E-mail" Style="{StaticResource EntryPayment}" />
+                <Entry Placeholder="E-mail" Text="{Binding Email}" Style="{StaticResource EntryPayment}" />
             </Frame>
 
-            <Button Text="Conectar e liberar wifi" Style="{StaticResource TicketPaidButton}" HorizontalOptions="Center"/>
+            <Button Text="Conectar e liberar wifi" Style="{StaticResource TicketPaidButton}" Command="{Binding ConnectToWifiCommand}" HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
